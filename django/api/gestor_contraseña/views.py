@@ -35,7 +35,8 @@ def add_password(request):
 
 
 @csrf_exempt
-def edit_password(request, pk):
+def edit_password(request):
+    pdb.set_trace()
     # Vista para editar una contraseña existente mediante una solicitud POST y devolver una respuesta JSON.
     data = request.POST
     my_json = json.loads(request.body.decode('utf8').replace("'", '"'))
@@ -43,12 +44,12 @@ def edit_password(request, pk):
     usuario = my_json['usuario']
     contrasena = my_json['contrasena']
 
-    password_entry = Contraseña.objects.get(pk=pk)
-    password_entry.usuario = usuario
-    password_entry.contrasena = contrasena
-    password_entry.save()
+    
+    Contraseña.objects.filter(usuario="macia").update(contrasena=contrasena)
 
-    return JsonResponse({'status': 'success'})
+    #valor =  Contraseña.objects.get(usuario="macia")
+
+    return JsonResponse({'status': contrasena})
 
 
 @csrf_exempt

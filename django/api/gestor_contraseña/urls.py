@@ -1,6 +1,9 @@
 from django.urls import path
 from . import views
 
+
+# Aquí le asigno una URL a mis funciones dentro del views (.views)
+
 urlpatterns = [
     path('password-list/', views.password_list, name='password_list'),
     path('add-password/', views.add_password, name='add_password'),

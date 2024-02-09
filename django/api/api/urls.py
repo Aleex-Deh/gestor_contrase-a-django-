@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+
+#Esto es la URL principal, de aqui saldrán las otras. En ellas he de incluir las urls de mis apps.  (include('gestor_contraseña.urls')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('gestor/', include('gestor_contraseña.urls')),

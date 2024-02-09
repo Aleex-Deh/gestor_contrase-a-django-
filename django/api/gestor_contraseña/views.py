@@ -31,29 +31,31 @@ def add_password(request):
     usuario = my_json['usuario']
     contrasena = my_json['contrasena']
     Contraseña.objects.create(usuario=usuario, contrasena=contrasena)
-    return JsonResponse({'status': 'success'})
+    return JsonResponse({'Su contraseña se ha guardado con exito'})
 
 
 @csrf_exempt
 def edit_password(request):
-    pdb.set_trace()
-    # Vista para editar una contraseña existente mediante una solicitud POST y devolver una respuesta JSON.
+    
     data = request.POST
     my_json = json.loads(request.body.decode('utf8').replace("'", '"'))
 
     usuario = my_json['usuario']
     contrasena = my_json['contrasena']
 
-    
-    Contraseña.objects.filter(usuario="macia").update(contrasena=contrasena)
-
-    #valor =  Contraseña.objects.get(usuario="macia")
-
-    return JsonResponse({'status': contrasena})
+    Contraseña.objects.filter(usuario=usuario).update(contrasena=contrasena)
+    return JsonResponse ({'Buenas, esta es su nueva contraseña': contrasena})
 
 
 @csrf_exempt
-def delete_password(request, pk):
-    # Vista para eliminar una contraseña existente mediante una solicitud POST y devolver una respuesta JSON.
-    Contraseña.objects.filter(pk=pk).delete()
-    return JsonResponse({'status': 'success'})
+def delete_password(request):
+    
+    data = request.POST
+    my_json = json.loads(request.body.decode('utf8').replace("'", '"'))
+
+    usuario = my_json['usuario']
+    contrasena = my_json['contrasena']
+    
+    Contraseña.objects.filter(usuario=usuario, contrasena=contrasena).delete()
+    
+    return JsonResponse({'Su contraseña se ha eliminado con exito'})
